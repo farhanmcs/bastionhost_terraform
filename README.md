@@ -22,3 +22,30 @@ To run this Dockerized API please enter following command:
 You can view current Date & Time by calling this API at URL : http://localhost:5432 
 
 # terraform-bastion
+
+This folder contains all the terraform files required to create an EC2 bastion host in AWS. 
+
+As a first step please create a public-private key pair locally using following command:
+
+	ssh-keygen -f <privatekeyname>
+
+This public-private key pair will be used later in conecting the EC2 instance of bastion host.
+
+As a next step to run these Terraform configurations please type the following commands:
+
+	terraform init
+
+	terraform plan
+
+You will be asked about multiple input params needed bt terraform configuration to setup like AWS region, EC2 AMI, VPC & Subnet details etc. Please provide those.
+
+Also it is expected that AWS CLI is already configured on your terminal to run this successfully.
+
+After plan is successfull please run the following command to create teh bastion host infrastructure
+
+	terraform apply -auto-approve
+
+To test this code we can ssh to our public instance, and then from our public instance to the private instance, using the command:
+
+	ssh -i <privatekeyname> <user>@<ip_address>
+
